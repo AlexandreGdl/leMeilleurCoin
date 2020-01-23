@@ -40,7 +40,7 @@
     position: relative;
 }
 
-.block_menu .nav_menu .item_menu.actif {
+.block_menu .nav_menu .item_menu.actif a {
     font-family: "Montserrat" !important;
     font-weight: bold;
 }
