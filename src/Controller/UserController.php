@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,7 +18,7 @@ Class UserController extends AbstractController{
      * @param Request $request
      * @return Response
      */
-    public function new(Request $request): Response
+    public function new(Request $request, EntityManagerInterface $entityManager): Response
     {   
 
         // creation de l'annonces
@@ -27,8 +28,16 @@ Class UserController extends AbstractController{
 
         $formUser->handleRequest($request);
         if ($formUser->isSubmitted() && $formUser->isValid()){
-            dump($user);
-            exit();
+
+            $user->setDateregistered(new \Datetime('now'));
+            $user->setRoles('user');
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            $this->addFlash("success","Utilisateur Inscrit !");
+
+        } else if ($formUser->isSubmitted()){
+            $this->addFlash("danger","Verifier votre formulaire");
         }
 
         return $this->render('User/inscription.html.twig',[
