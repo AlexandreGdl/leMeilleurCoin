@@ -22,7 +22,16 @@ Class AdController extends AbstractController{
         // creation de l'annonces
         $ad = new Ad();
 
+        // création du formulaire
         $formAd = $this->createForm(AdType::class, $ad);
+
+        // vérification du formulaire
+        $formAd->handleRequest($request);
+        if ($formAd->isSubmitted() && $formAd->isValid()) {
+            dump($ad);
+            exit();
+        }
+        // appel de la vue
         return $this->render('Ad/new.html.twig',[
             'formAd'=>$formAd->createView()
         ]);

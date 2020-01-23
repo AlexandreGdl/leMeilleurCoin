@@ -41,9 +41,6 @@ class AdType extends AbstractType
                 'label' => 'Prix',
                 'attr' => ['placeholder' => 'Prix...']
             ])
-            ->add('datecreated',TextType::class, [
-                'required' => true,
-            ])
             ->add('submit', SubmitType::class,[
                 "label"=>"Envoyer"
             ])
