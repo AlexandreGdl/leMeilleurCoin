@@ -1,3 +1,18 @@
-body {
-    background-color: lightgray;
+.block_body {
+    display: flex;
+    flex-flow: row nowrap;
+    width: 100vw;
+    height: 100vh;
+}
+
+.block_menu{
+    flex-basis: 20%;
+    height: 100%;
+    background: #6b9311;
+}
+
+.block_main{
+    flex-basis: 80%;
+    height: 100%;
+    background-color: red;
 }
