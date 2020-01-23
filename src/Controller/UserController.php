@@ -45,7 +45,17 @@ Class UserController extends AbstractController{
         ]);
     }
 
-    
+    /**
+     * @Route("/all",name="user_all",methods={"GET","POST"})
+     * 
+     * @param Request $request
+     * @return Response
+     */
+    public function all(Request $request, EntityManagerInterface $entityManager): Response
+    {       
+            $userGet = $entityManager->getRepository('App:User')->getAllUser();
+           return $this->render('User/all.html.twig',['user'=>$userGet]);
+    }
 
 }
 

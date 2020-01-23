@@ -47,4 +47,15 @@ class UserRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    /**
+     * @return User[]
+     */
+    public function getAllUser(){
+
+        $queryBuilder = $this->createQueryBuilder('u')
+        ->setMaxResults(10);
+
+        return $queryBuilder->getQuery()->getResult();
+    }
 }
