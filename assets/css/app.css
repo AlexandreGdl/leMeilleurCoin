@@ -1,3 +1,7 @@
+* {
+    font-family: "Montserrat";
+}
+
 .block_body {
     display: flex;
     flex-flow: row nowrap;
@@ -8,11 +12,31 @@
 .block_menu{
     flex-basis: 20%;
     height: 100%;
-    background: #6b9311;
+    background: #F2F2F2;
 }
 
-.block_main{
+.block_main {
     flex-basis: 80%;
     height: 100%;
-    background-color: red;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
 }
+.block_main p {
+    font-family: "Montserrat Light";
+}
+.block_main .line {
+    width: 1px;
+    height: 100px;
+    background-color: lightgrey;
+    margin: 30px 0;
+}
+.block_main .input-group .input-group-append .input-group-text {
+    background-color: #FFF2BC;
+}
+.block_main .fa-search {
+    color: dimgrey !important;
+}
+

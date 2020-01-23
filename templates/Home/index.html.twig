@@ -1,19 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}
-   LeMeilleurCoin - Projet Symfony
-{% endblock %}
+{% block title %}LeMeilleurCoin - Symfony Projet{% endblock %}
 
 {% block body %}
-    <h2>BIENVENUE SUR LEMEILLEURCOIN</h2>
-    <div>
+    <div class="block_main">
+        <h2>BIENVENUE SUR LEMEILLEURCOIN</h2>
+        <div class="line">
 
-    </div>
-    <p>Retrouver sur ce site toutes les annonces sur les différents produits que vous recherchez !</p>
-    <div class="input-group mb-3 w-50">
-        <input type="text" class="form-control" placeholder="Recherche une annonce..." aria-label="Recipient's username" aria-describedby="basic-addon2">
-        <div class="input-group-append">
-            <span class="input-group-text" id="basic-addon2" ><a href=""><i class="fas fa-search"></i></a></span>
+        </div>
+        <p>Retrouver sur ce site toutes les annonces sur les différents produits que vous recherchez !</p>
+        <div class="input-group mb-3 w-75">
+            <input type="text" class="form-control" placeholder="Recherche une annonce..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <span class="input-group-text" id="basic-addon2" ><a href=""><i class="fas fa-search"></i></a></span>
+            </div>
         </div>
     </div>
 {% endblock %}
+
+{% block javascripts %}{% endblock %}
+
+

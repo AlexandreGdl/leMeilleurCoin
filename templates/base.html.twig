@@ -1,30 +1,30 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        {{ encore_entry_link_tags('app') }}
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}{% endblock %}
+    {{ encore_entry_link_tags('app') }}
 
 
-        <link
+    <link
             href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
             rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
             crossorigin="anonymous"
-        >
-        <script src="https://kit.fontawesome.com/f8504e7ce3.js" crossorigin="anonymous"></script>
-    </head>
-    <body class="block_body">
+    >
+    <script src="https://kit.fontawesome.com/f8504e7ce3.js" crossorigin="anonymous"></script>
+</head>
+<body class="block_body">
 
-        <div class="block_menu">
+<div class="block_menu">
 
-        </div>
-        <main class="block_main">
+</div>
+<main class="block_main">
 
-        {% block body %}
-        
-        {% endblock %}
-        </main>
-        {% block javascripts %}{% endblock %}
-    </body>
+    {% block body %}
+
+    {% endblock %}
+</main>
+{% block javascripts %}{% endblock %}
+</body>
 </html>
