@@ -9,6 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class AdType extends AbstractType
 {
@@ -42,6 +43,9 @@ class AdType extends AbstractType
             ])
             ->add('datecreated',TextType::class, [
                 'required' => true,
+            ])
+            ->add('submit', SubmitType::class,[
+                "label"=>"Envoyer"
             ])
         ;
     }

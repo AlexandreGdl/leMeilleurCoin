@@ -24,7 +24,7 @@ Class AdController extends AbstractController{
 
         $formAd = $this->createForm(AdType::class, $ad);
         return $this->render('Ad/new.html.twig',[
-            // 'formAd'=>$formAd->createView()
+            'formAd'=>$formAd->createView()
         ]);
     }
 
