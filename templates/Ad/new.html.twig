@@ -9,6 +9,14 @@
     <div class="container w-75">
         {{form(formAd)}}
     </div>
+
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}" role="alert">
+                {{message}}
+            </div>
+        {% endfor %}
+    {% endfor %}
 {% endblock %}
 
 {% block javascripts %}{% endblock %}

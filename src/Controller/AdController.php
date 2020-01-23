@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,9 +16,10 @@ Class AdController extends AbstractController{
      * @Route("/deposer",name="ad_new",methods={"GET","POST"})
      * 
      * @param Request $request
+     * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    public function new(Request $request): Response
+    public function new(Request $request, EntityManagerInterface $entityManager): Response
     {   
         // creation de l'annonces
         $ad = new Ad();
@@ -28,8 +30,13 @@ Class AdController extends AbstractController{
         // vérification du formulaire
         $formAd->handleRequest($request);
         if ($formAd->isSubmitted() && $formAd->isValid()) {
-            dump($ad);
-            exit();
+
+            $ad->setDatecreated(new\Datetime('now'));
+            $entityManager->persist($ad);
+            $entityManager->flush();
+
+            // Création d'un message flash
+            $this->addFlash("success", "Votre annonce a bien été créée !");
         }
         // appel de la vue
         return $this->render('Ad/new.html.twig',[
