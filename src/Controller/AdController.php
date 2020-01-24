@@ -78,8 +78,8 @@ Class AdController extends AbstractController{
      */
     public function detail(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $ad = $entityManager->getRepository('App:Ad')->findAll();
-        return $this->render('Ad/list.html.twig', ['annonces'=>$ad]);
+        $ad = $entityManager->getRepository('App:Ad')->find($request->get('id'));
+        return $this->render('Ad/detail.html.twig', ['annonce'=>$ad]);
     }
 
 }

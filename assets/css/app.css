@@ -112,3 +112,26 @@
     justify-content: flex-start !important;
     background-color: white;
 }
+.block_main .block_detail {
+    background-color: #F2F2F2;
+    width: 80%;
+    padding: 2rem;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+}
+.block_main .block_detail .inner {
+    width: 40%;
+}
+
+.block_main .block_detail .block_titre {
+    border-bottom: 1px solid black;
+    padding-bottom: 1rem;
+}
+
+.block_main .block_detail .block_more {
+    padding-top: 1rem;
+}
+
