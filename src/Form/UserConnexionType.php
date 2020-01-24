@@ -3,28 +3,22 @@
 namespace App\Form;
 
 use App\Entity\User;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-class UserType extends AbstractType
+class UserConnexionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username',TextType::class,[
+            ->add('email',TextType::class,[
                 'required'=>true,
-                'label'=>'Identifiant',
-                'attr'=> ['placeholder' => 'Identifiant...','maxlength'=>50]
-            ])
-            ->add('email',EmailType::class,[
-                'required'=>true,
-                'label'=>'Email',
-                'attr'=>['placeholder'=>'Email...','maxlength'=>150]
+                'label'=>'Adresse Email',
+                'attr'=> ['placeholder' => 'Adresse Email...','maxlength'=>50]
             ])
             ->add('password',PasswordType::class,[
                 'required'=>true,
@@ -32,7 +26,7 @@ class UserType extends AbstractType
                 'attr'=>['placeholder'=>'Mot de passe...','maxlength'=>50]
             ])
             ->add('submit', SubmitType::class,[
-                "label"=>"S'inscrire"
+                "label"=>"Se connecter"
             ])
         ;
     }

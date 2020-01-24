@@ -51,11 +51,39 @@ class UserRepository extends ServiceEntityRepository
     /**
      * @return User[]
      */
+    public function Connexion($email,$password){
+
+        $queryBuilder = $this->createQueryBuilder('u')
+        ->where('u.email LIKE :email AND u.password LIKE :password')
+        ->setParameter('email',$email)
+        ->setParameter('password',$password)
+        ->setMaxResults(1);
+
+
+        return $queryBuilder->getQuery()->getArrayResult();
+    }
+
+    /**
+     * @return User[]
+     */
     public function getAllUser(){
 
         $queryBuilder = $this->createQueryBuilder('u')
         ->setMaxResults(10);
 
         return $queryBuilder->getQuery()->getResult();
+    }
+
+    /**
+     * @return User[]
+     */
+    public function checkEmailUsed($email){
+
+        $queryBuilder = $this->createQueryBuilder('u')
+        ->where('u.email LIKE :email')->setParameter('email', $email)
+        ->setMaxResults(1);
+
+
+        return $queryBuilder->getQuery()->getArrayResult();
     }
 }
