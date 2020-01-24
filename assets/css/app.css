@@ -7,6 +7,7 @@
     flex-flow: row nowrap;
     width: 100vw;
     height: 100vh;
+    overflow-x: hidden;
 }
 
 .block_menu{
@@ -17,8 +18,15 @@
     flex-flow: column wrap;
     justify-content: space-between;
     align-items: center;
+    position: fixed;
+    width: 20%;
+    height: 100%;
+    top:0;
+    left:0;
 }
-
+.pushing{
+    flex-basis: 20%;
+}
 .block_menu .site_name {
     font-size: 23pt;
     margin-top: 35px !important;
