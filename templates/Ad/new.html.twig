@@ -3,6 +3,7 @@
 {% block title %}LeMeilleurCoin - Symfony Projet{% endblock %}
 
 {% block body %}
+    <main class="block_main">
     <h2 class="title mb-5">DEPOSER ICI VOS ANNONCES</h2>
     {% form_theme formAd 'bootstrap_4_horizontal_layout.html.twig' %}
 
@@ -17,6 +18,7 @@
             </div>
         {% endfor %}
     {% endfor %}
+    </main>
 {% endblock %}
 
 {% block javascripts %}{% endblock %}

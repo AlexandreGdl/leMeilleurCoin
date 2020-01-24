@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Ad;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
@@ -47,4 +48,15 @@ class AdRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    /**
+     * @param string $name
+     * @return User[]
+     */
+    public function findUserByName($name) {
+        $queryBuilder = $this->find('u')
+            ->setMaxResults(10);
+
+        return $queryBuilder->getQuery()->getResult();
+    }
 }

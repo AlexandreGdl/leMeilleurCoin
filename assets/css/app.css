@@ -95,3 +95,8 @@
 .block_main .fa-search {
     color: dimgrey !important;
 }
+
+.block_main.annonces {
+    justify-content: flex-start !important;
+    background-color: white;
+}

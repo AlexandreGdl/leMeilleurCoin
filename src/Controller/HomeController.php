@@ -23,8 +23,8 @@ Class HomeController extends AbstractController{
 
     /**
      * @Route("cgu",name="home_cgu",methods={"GET"})
-     *
-     * @param Request $request
+     *z
+     * @param Request $requestz
      * @return Response
      */
     public function cgu(Request $request): Response

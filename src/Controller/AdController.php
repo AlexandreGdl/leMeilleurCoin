@@ -60,12 +60,13 @@ Class AdController extends AbstractController{
      * @Route("/annonces",name="ad_list",methods={"GET"})
      * 
      * @param Request $request
+     * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    public function list(Request $request): Response
+    public function list(Request $request, EntityManagerInterface $entityManager): Response
     {   
-        
-        return $this->render('Ad/list.html.twig');
+        $ad = $entityManager->getRepository('App:Ad')->findAll();
+        return $this->render('Ad/list.html.twig', ['annonces'=>$ad]);
     }
 
 }
