@@ -70,7 +70,7 @@ Class AdController extends AbstractController{
     }
 
     /**
-     * @Route("/annonces/{id}", requirements={"id"="\d+"} name="ad_detail",methods={"GET"})
+     * @Route("/annonces/{id}", requirements={"id"="\d+"}, name="ad_detail",methods={"GET"})
      *
      * @param Request $request
      * @param EntityManagerInterface $entityManager

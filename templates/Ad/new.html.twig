@@ -7,9 +7,15 @@
     <h2 class="title mb-5">DEPOSER ICI VOS ANNONCES</h2>
     {% form_theme formAd 'bootstrap_4_horizontal_layout.html.twig' %}
 
-    <div class="container w-75">
-        {{form(formAd)}}
-    </div>
+    {% if app.session.get('identifiant') %}
+        <div class="container w-75">
+            {{form(formAd)}}
+        </div>
+    {% else %}
+        <div class="alert alert-danger" role="alert">
+            Seul les utilisateurs <a href="/connexion">connectés</a> peuvent poster une annonces sur notre site.
+        </div>
+    {% endif %}
 
     {% for label, messages in app.flashes %}
         {% for message in messages %}

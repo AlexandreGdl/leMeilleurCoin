@@ -67,8 +67,7 @@ Class UserController extends AbstractController{
         $formUser->handleRequest($request);
         if ($formUser->isSubmitted() && $formUser->isValid()){
             $exist = $entityManager->getRepository('App:User')->connexion($user->getEmail(),$user->getPassword());
-
-            $this->addFlash("success","Utilisateur connecté !");
+            
             $request->getSession()->set('identifiant',$exist[0]['username']);
             $request->getSession()->set('email',$exist[0]['email']);
             $request->getSession()->set('id',$exist[0]['id']);
