@@ -21,5 +21,17 @@ Class HomeController extends AbstractController{
         return $this->render('Home/index.html.twig');
     }
 
+    /**
+     * @Route("cgu",name="home_cgu",methods={"GET"})
+     *z
+     * @param Request $requestz
+     * @return Response
+     */
+    public function cgu(Request $request): Response
+    {
+
+        return $this->render('Home/cgu.html.twig');
+    }
+
 }
 

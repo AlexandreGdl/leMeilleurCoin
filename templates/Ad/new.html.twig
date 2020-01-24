@@ -3,8 +3,22 @@
 {% block title %}LeMeilleurCoin - Symfony Projet{% endblock %}
 
 {% block body %}
-    <h2>DEPOSER</h2>
-    {{form(formAd)}}
+    <main class="block_main">
+    <h2 class="title mb-5">DEPOSER ICI VOS ANNONCES</h2>
+    {% form_theme formAd 'bootstrap_4_horizontal_layout.html.twig' %}
+
+    <div class="container w-75">
+        {{form(formAd)}}
+    </div>
+
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}" role="alert">
+                {{message}}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    </main>
 {% endblock %}
 
 {% block javascripts %}{% endblock %}
