@@ -19,10 +19,14 @@
     align-items: center;
 }
 
-.block_menu .site_name{
+.block_menu .site_name {
     font-size: 23pt;
     margin-top: 35px !important;
     font-family: "Montserrat Light";
+}
+.block_menu .site_name a{
+
+    text-decoration: none;
 }
 
 .block_menu .nav_menu{
