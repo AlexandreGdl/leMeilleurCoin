@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AdRepository")
@@ -18,26 +19,59 @@ class Ad
     private $id;
 
     /**
+     * @Assert\NotBlank(message="Veuillez renseigner un titre à votre annonce !")
+     * @Assert\Length(
+     *     min="2", max="50",
+     *     minMessage = "1 caractère minimum !",
+     *     maxMessage = "100 caractères maximum !",
+     *)
+     *
      * @ORM\Column(type="string", length=100)
      */
     private $title;
 
     /**
+     * @Assert\NotBlank(message="Veuillez renseigner une description à votre annonce !")
+     * @Assert\Length(
+     *     min="2", max="1000",
+     *     minMessage = "1 caractère minimum !",
+     *     maxMessage = "1000 caractères maximum !",
+     *)
+     *
      * @ORM\Column(type="text")
      */
     private $description;
 
     /**
+     * @Assert\NotBlank(message="Veuillez renseigner une ville à votre annonce !")
+     * @Assert\Length(
+     *     min="1", max="150",
+     *     minMessage = "1 caractère minimum !",
+     *     maxMessage = "150 caractères maximum !",
+     *)
+     *
      * @ORM\Column(type="string", length=150)
      */
     private $city;
 
     /**
+     * @Assert\NotBlank(message="Veuillez renseigner un code postal (ex: 49000) à votre annonce !")
+     * @Assert\Length(
+     *     min="5", max="5",
+     *     exactMessage="Un code postal contient 5 chiffres !"
+     * )
+     *
      * @ORM\Column(type="integer")
      */
     private $zip;
 
     /**
+     * @Assert\NotBlank(message="Veuillez renseigner un prix à votre annonce !")
+     * @Assert\Type(
+     *    type="integer",
+     *    message="test"
+     * )
+     *
      * @ORM\Column(type="integer")
      */
     private $price;
