@@ -25,7 +25,7 @@ Class UserController extends AbstractController{
         // creation de l'annonces
         $user = new User();
 
-        $formUser = $this->createForm(UserType::class, $user);
+        $formUser = $this->createForm(UserType::class, $user , ["validation_groups" => ["registration"]]);
 
         $formUser->handleRequest($request);
         if ($formUser->isSubmitted() && $formUser->isValid()){
@@ -62,16 +62,20 @@ Class UserController extends AbstractController{
 
         $user = new User();
 
-        $formUser = $this->createForm(UserConnexionType::class, $user);
+        $formUser = $this->createForm(UserConnexionType::class, $user, ["validation_groups" => ["connexion"]]);
 
         $formUser->handleRequest($request);
         if ($formUser->isSubmitted() && $formUser->isValid()){
             $exist = $entityManager->getRepository('App:User')->connexion($user->getEmail(),$user->getPassword());
             
-            $request->getSession()->set('identifiant',$exist[0]['username']);
-            $request->getSession()->set('email',$exist[0]['email']);
-            $request->getSession()->set('id',$exist[0]['id']);
-            return $this->redirect('/');
+            if ($exist){
+                $request->getSession()->set('identifiant',$exist[0]['username']);
+                $request->getSession()->set('email',$exist[0]['email']);
+                $request->getSession()->set('id',$exist[0]['id']);
+                return $this->redirect('/');
+            } else {
+                $this->addFlash("danger","Ce compte n'existe pas !");
+            }
         }
         return $this->render('User/connexion.html.twig',[
             'formUser'=>$formUser->createView()
