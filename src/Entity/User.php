@@ -23,8 +23,8 @@ class User
      * @Assert\NotBlank(message="Veuillez renseignez un Identifiant.",groups={"registration"})
      * @Assert\Length(
      *      min="3",max="50",
-     *      minMessage="3 characteres minimum",
-     *      maxMessage="50 characteres maximum"
+     *      minMessage="3 caractères minimum",
+     *      maxMessage="50 caractères maximum",groups={"registration"}
      * )
      */
     private $username;
