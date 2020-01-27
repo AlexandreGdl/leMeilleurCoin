@@ -118,10 +118,8 @@ Class UserController extends AbstractController{
     {       
         $user = $entityManager->getRepository('App:User')->find($request->getSession()->get('id'));
 
-        $ads = $entityManager->getRepository('App:Ad')->getAdByUser($user->getId());
-
         return $this->render('User/annonces.html.twig',[
-            "annonces"=> $ads
+            "annonces"=> $user
         ]);
     }
 

@@ -39,6 +39,7 @@ Class AdController extends AbstractController{
 
             // Création d'un message flash
             $this->addFlash("success", "Votre annonce a bien été créée !");
+            return $this->redirect('profile/annonces');
         }
         // appel de la vue
         return $this->render('Ad/new.html.twig',[

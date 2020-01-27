@@ -5,6 +5,13 @@
 {% block body %}
         <main class="block_main">
         <h2 class="mb-5">Mes annonces</h2>
+         {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label }}" role="alert">
+                    {{message}}
+                </div>
+            {% endfor %}
+        {% endfor %}
             <table class="table table-hover">
                 <thead>
                 <tr>
@@ -16,7 +23,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for annonce in annonces %}
+                {% for annonce in annonces.ads %}
                     <tr>
                         <td scope="row">{{ annonce.title }}</td>
                         <td>{{ annonce.description }}</td>
