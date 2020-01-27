@@ -108,5 +108,24 @@ Class UserController extends AbstractController{
            return $this->redirect('/');
     }
 
+    /**
+     * @Route("/profile/annonces",name="user_annonces",methods={"GET","POST"})
+     * 
+     * @param Request $request
+     * @return Response
+     */
+    public function annonces(Request $request, EntityManagerInterface $entityManager): Response
+    {       
+        $user = $entityManager->getRepository('App:User')->find($request->getSession()->get('id'));
+
+        $ads = $entityManager->getRepository('App:Ad')->getAdByUser($user->getId());
+
+        return $this->render('User/annonces.html.twig',[
+            "annonces"=> $ads
+        ]);
+    }
+
+
+
 }
 

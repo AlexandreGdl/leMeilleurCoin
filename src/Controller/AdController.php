@@ -29,9 +29,11 @@ Class AdController extends AbstractController{
 
         // vérification du formulaire
         $formAd->handleRequest($request);
-        if ($formAd->isSubmitted() && $formAd->isValid()) {
+        if ($formAd->isSubmitted() && $formAd->isValid() && $request->getSession()->get('identifiant')) {
 
             $ad->setDatecreated(new\Datetime('now'));
+            $user = $entityManager->getRepository('App:User')->find($request->getSession()->get('id'));
+            $ad->setUser($user);
             $entityManager->persist($ad);
             $entityManager->flush();
 
