@@ -31,6 +31,12 @@ class Ad
     private $title;
 
     /**
+     *
+     * @ORM\Column(type="array",name="categories")
+     */
+    private $category;
+
+    /**
      * @Assert\NotBlank(message="Veuillez renseigner une description à votre annonce !")
      * @Assert\Length(
      *     min="2", max="1000",
