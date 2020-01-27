@@ -3,9 +3,12 @@
 namespace App\Form;
 
 use App\Entity\Ad;
+use App\Entity\Category;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -21,6 +24,17 @@ class AdType extends AbstractType
                 'label' => 'Titre',
                 'attr' => ['placeholder' => 'Titre...', 'maxlength' => 100]
             ])
+
+            ->add('categories', EntityType::class, [
+                'class' => Category::class,
+                'multiple' => true,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('c')
+                        ->orderBy('c.title', 'ASC');
+                },
+                'choice_label' => 'title',
+            ])
+        
             ->add('description',TextType::class, [
                 'required' => true,
                 'label' => 'Description',

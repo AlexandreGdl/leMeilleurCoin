@@ -8,13 +8,16 @@
         <div class="block_detail mt-5">
             <div class="inner">
                 <div class="block_titre">
-                 <h3>{{ dump(annonce.categories) }}</h3>
                     <h3>{{ annonce.title }}</h3>
                     <p>{{ annonce.description }}</p>
                 </div>
                 <div class="block_more">
                     <p>Ville de l'annonceur : {{ annonce.city }}</p>
                     <p>Code postale de l'annonceur : {{ annonce.zip }}</p>
+                    <p>Prix : {{ annonce.price }}€</p>
+                    {% for category in annonce.categories %}
+                        <p> {{category.title}}
+                    {% endfor %}
                     <p>Prix : {{ annonce.price }}€</p>
                     <button type="button" class="btn btn-outline-primary">Acheter</button>
                 </div>
