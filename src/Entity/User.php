@@ -63,9 +63,15 @@ class User
      */
     private $ads;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Ad")
+     */
+    private $fav;
+
     public function __construct()
     {
         $this->ads = new ArrayCollection();
+        $this->fav = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -159,6 +165,32 @@ class User
             if ($ad->getUser() === $this) {
                 $ad->setUser(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Ad[]
+     */
+    public function getFav(): Collection
+    {
+        return $this->fav;
+    }
+
+    public function addFav(Ad $fav): self
+    {
+        if (!$this->fav->contains($fav)) {
+            $this->fav[] = $fav;
+        }
+
+        return $this;
+    }
+
+    public function removeFav(Ad $fav): self
+    {
+        if ($this->fav->contains($fav)) {
+            $this->fav->removeElement($fav);
         }
 
         return $this;
