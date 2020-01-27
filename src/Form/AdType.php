@@ -10,6 +10,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -35,10 +36,10 @@ class AdType extends AbstractType
                 'choice_label' => 'title',
             ])
         
-            ->add('description',TextType::class, [
+            ->add('description',TextareaType::class, [
                 'required' => true,
                 'label' => 'Description',
-                'attr' => ['placeholder' => 'Description de votre annonce...']
+                'attr' => ['placeholder' => 'Description de votre annonce...', 'rows' => '5']
             ])
             ->add('city',TextType::class, [
                 'required' => true,
