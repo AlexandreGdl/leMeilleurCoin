@@ -15,6 +15,10 @@
                     <p>Ville de l'annonceur : {{ annonce.city }}</p>
                     <p>Code postale de l'annonceur : {{ annonce.zip }}</p>
                     <p>Prix : {{ annonce.price }}€</p>
+                    {% for category in annonce.categories %}
+                        <p> {{category.title}}
+                    {% endfor %}
+                    <p>Prix : {{ annonce.price }}€</p>
                     <button type="button" class="btn btn-outline-primary">Acheter</button>
                 </div>
             </div>
