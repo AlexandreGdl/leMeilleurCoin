@@ -21,6 +21,7 @@
                     <th scope="col">Code postal</th>
                     <th scope="col">Prix</th>
                     <th scope="col"></th>
+                    <th scope="col"></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -32,6 +33,7 @@
                         <td>{{ annonce.zip }}</td>
                         <td>{{ annonce.price }}</td>
                         <td><a href="/annonces/{{annonce.id}}">Voir</a></td>
+                        <td><a href="/remove/fav/{{annonce.id}}">Supprimer</a></td>
 
                     </tr>
                 {% endfor %}

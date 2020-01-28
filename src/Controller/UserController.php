@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Ad;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -157,12 +158,27 @@ Class UserController extends AbstractController{
 
             return $this->redirect('../profile/fav');
         }
-
-
         exit();
     }
 
+    /**
+     * @Route("/remove/fav/{id}",requirements={"id"="\d+"},name="user_removeFav",methods={"GET","POST"})
+     *
+     * @param Request $request
+     * @return Response
+     */
 
+    public function removeFav(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        if($request->getSession()->get('id')){
+            $user = $entityManager->getRepository('App:User')->find($request->getSession()->get('id'));
+            $id = $request->get('id');
+            $ad = $entityManager->getRepository('App:Ad')->find($id);
+            $user->removeFav($ad);
+            $entityManager->flush();
 
+            return $this->redirectToRoute('user_getFav');
+        }
+        exit();
+    }
 }
-
