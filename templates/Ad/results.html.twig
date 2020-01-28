@@ -4,7 +4,10 @@
 
 {% block body %}
     <main class="block_main">
-        <h2 class="m-5">RESULTATS DE VOTRE RECHERCHE</h2>
+        <h2 class="mb-5">RESULTATS DE VOTRE RECHERCHE</h2>
+        <div class="btn btn-primary mb-4" role="alert">
+            <a style="text-decoration: none; color: white" href="/rechercher">Retour à la page de recherche</a>
+        </div>
         <table class="table table-hover">
             <thead>
             <tr>
@@ -27,9 +30,7 @@
             {% endfor %}
             </tbody>
         </table>
-        <div class="btn btn-primary" role="alert">
-            <a style="text-decoration: none; color: white" href="/rechercher">Retour à la page de recherche.</a>
-        </div>
+
     </main>
 {% endblock %}
 

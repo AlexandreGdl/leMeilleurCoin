@@ -63,12 +63,16 @@ class AdRepository extends ServiceEntityRepository
 
     /**
      * @param string $title
+     * @param string $zip
+     * @param string $price
      * @return Ad[]
      */
-    public function searchAd($title){
+    public function searchAd($title, $zip, $price){
 
         $queryBuilder = $this->createQueryBuilder('a')
-            ->where('a.title LIKE :title')->setParameter('title', '%'.$title.'%');
+            ->where('a.title LIKE :title')->setParameter('title', '%'.$title.'%')
+            ->orWhere('a.zip LIKE :zip')->setParameter('zip', '%'.$zip.'%')
+            ->orWhere('a.price LIKE :price')->setParameter('price', '%'.$price.'%');
 
         return $queryBuilder->getQuery()->getArrayResult();
     }

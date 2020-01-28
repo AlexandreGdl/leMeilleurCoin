@@ -63,7 +63,9 @@ Class AdController extends AbstractController{
         $formSearch->handleRequest($request);
         if ($formSearch->isSubmitted() && $formSearch->isValid()) {
             $title = $search->getTitle();
-            $searchAd = $entityManager->getRepository("App:Ad")->SearchAd($title);
+            $zip = $search->getZip();
+            $price = $search->getPrice();
+            $searchAd = $entityManager->getRepository("App:Ad")->SearchAd($title, $zip, $price);
             // appel de la vue
             return $this->render('Ad/results.html.twig', [
                 'formSearch'=>$formSearch->createView(),
