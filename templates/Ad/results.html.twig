@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LeMeilleurCoin - Symfony Projet{% endblock %}
+
+{% block body %}
+    <main class="block_main">
+        <h2 class="mb-5">RESULTATS DE VOTRE RECHERCHE</h2>
+        <div class="btn btn-primary mb-4" role="alert">
+            <a style="text-decoration: none; color: white" href="/rechercher">Retour à la page de recherche</a>
+        </div>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Titre</th>
+                <th scope="col">Description</th>
+                <th scope="col">Ville</th>
+                <th scope="col">Code postal</th>
+                <th scope="col">Prix</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for annonce in annonces %}
+                <tr>
+                    <td scope="row">{{ annonce.title }}</td>
+                    <td>{{ annonce.description }}</td>
+                    <td>{{ annonce.city }}</td>
+                    <td>{{ annonce.zip }}</td>
+                    <td>{{ annonce.price }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </main>
+{% endblock %}
+
+{% block javascripts %}{% endblock %}
+
+

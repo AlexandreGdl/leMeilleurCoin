@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\SearchFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -48,15 +49,37 @@ Class AdController extends AbstractController{
     }
 
     /**
-     * @Route("/rechercher",name="ad_search",methods={"GET"})
+     * @Route("/rechercher",name="ad_search",methods={"GET", "POST"})
      * 
      * @param Request $request
+     * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    public function search(Request $request): Response
-    {   
-        
-        return $this->render('Ad/search.html.twig');
+    public function search(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        // creation de l'annonces
+        $search = new Ad();
+
+        // création du formulaire
+        $formSearch = $this->createForm(SearchFormType::class, $search, ["validation_groups" => ["search"]]);
+
+        $formSearch->handleRequest($request);
+        if ($formSearch->isSubmitted() && $formSearch->isValid()) {
+            $title = $search->getTitle();
+            $zip = $search->getZip();
+            $price = $search->getPrice();
+            $searchAd = $entityManager->getRepository("App:Ad")->SearchAd($title, $zip, $price);
+            // appel de la vue
+            return $this->render('Ad/results.html.twig', [
+                'formSearch'=>$formSearch->createView(),
+                'annonces' => $searchAd
+            ]);
+        }
+        // appel de la vue
+        return $this->render('Ad/search.html.twig',[
+            'formSearch'=>$formSearch->createView(),
+            'annonces' => $search
+        ]);
     }
 
     /**
