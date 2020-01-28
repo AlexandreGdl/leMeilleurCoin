@@ -54,16 +54,12 @@ class AdRepository extends ServiceEntityRepository
      * @return Ad[]
      */
     public function getAdByUser($user){
-    public function findUserByName($name)
-    {
         $queryBuilder = $this->find('u')
             ->setMaxResults(10);
 
         $queryBuilder = $this->createQueryBuilder('a')
         ->where('a.user LIKE :user')
         ->setParameter('user', $user);
-        
-
 
         return $queryBuilder->getQuery()->getArrayResult();
     }
