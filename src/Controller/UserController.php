@@ -108,5 +108,59 @@ Class UserController extends AbstractController{
            return $this->redirect('/');
     }
 
+    /**
+     * @Route("/profile/annonces",name="user_annonces",methods={"GET","POST"})
+     * 
+     * @param Request $request
+     * @return Response
+     */
+    public function annonces(Request $request, EntityManagerInterface $entityManager): Response
+    {       
+        $user = $entityManager->getRepository('App:User')->find($request->getSession()->get('id'));
+
+        return $this->render('User/annonces.html.twig',[
+            "user"=> $user
+        ]);
+    }
+
+    /**
+     * @Route("/profile/fav",name="user_getFav",methods={"GET","POST"})
+     * 
+     * @param Request $request
+     * @return Response
+     */
+    public function getFav(Request $request, EntityManagerInterface $entityManager): Response
+    {       
+        $user = $entityManager->getRepository('App:User')->find($request->getSession()->get('id'));
+
+        return $this->render('User/fav.html.twig',[
+            "user"=> $user
+        ]);
+    }
+
+
+    /**
+     * @Route("/fav/{id}",requirements={"id"="\d+"},name="user_addFav",methods={"GET","POST"})
+     * 
+     * @param Request $request
+     * @return Response
+     */
+    public function addFav(Request $request, EntityManagerInterface $entityManager): Response
+    {       
+        if($request->getSession()->get('id')){
+            $user = $entityManager->getRepository('App:User')->find($request->getSession()->get('id'));
+            $id = $request->get('id');
+            $ad = $entityManager->getRepository('App:Ad')->find($id);
+            $user->addFav($ad);
+            $entityManager->persist($user);
+            $entityManager->flush();
+        }
+       
+
+        exit();
+    }
+
+
+
 }
 

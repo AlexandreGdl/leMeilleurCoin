@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -55,6 +57,22 @@ class User
      * @ORM\Column(type="datetime")
      */
     private $dateregistered;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Ad", mappedBy="user", orphanRemoval=true)
+     */
+    private $ads;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Ad")
+     */
+    private $fav;
+
+    public function __construct()
+    {
+        $this->ads = new ArrayCollection();
+        $this->fav = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -117,6 +135,63 @@ class User
     public function setDateregistered(\DateTimeInterface $dateregistered): self
     {
         $this->dateregistered = $dateregistered;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Ad[]
+     */
+    public function getAds(): Collection
+    {
+        return $this->ads;
+    }
+
+    public function addAd(Ad $ad): self
+    {
+        if (!$this->ads->contains($ad)) {
+            $this->ads[] = $ad;
+            $ad->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAd(Ad $ad): self
+    {
+        if ($this->ads->contains($ad)) {
+            $this->ads->removeElement($ad);
+            // set the owning side to null (unless already changed)
+            if ($ad->getUser() === $this) {
+                $ad->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Ad[]
+     */
+    public function getFav(): Collection
+    {
+        return $this->fav;
+    }
+
+    public function addFav(Ad $fav): self
+    {
+        if (!$this->fav->contains($fav)) {
+            $this->fav[] = $fav;
+        }
+
+        return $this;
+    }
+
+    public function removeFav(Ad $fav): self
+    {
+        if ($this->fav->contains($fav)) {
+            $this->fav->removeElement($fav);
+        }
 
         return $this;
     }

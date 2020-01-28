@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LeMeilleurCoin - Symfony Projet{% endblock %}
+
+{% block body %}
+        <main class="block_main">
+        <h2 class="mb-5">Mes annonces</h2>
+         {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label }}" role="alert">
+                    {{message}}
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+                <div class="annonces_container">
+                    {% for annonce in user.ads %}
+                        <a href="/annonces/{{annonce.id}}">
+                        <div class="annonces_item">
+                            <p>{{ annonce.title }}</p>
+                            <p>{{ annonce.description }}</p>
+                            <p>{{ annonce.city }}</p>
+                            <p>{{ annonce.zip }}</p>
+                            <p>{{ annonce.price }}</p>
+                        </div>
+                        </a>
+                    {% endfor %}
+                </div>
+        </main>
+{% endblock %}
+
+{% block javascripts %}{% endblock %}
+
+
