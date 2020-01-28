@@ -12,28 +12,20 @@
                 </div>
             {% endfor %}
         {% endfor %}
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th scope="col">Titre</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Ville</th>
-                    <th scope="col">Code postal</th>
-                    <th scope="col">Prix</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for annonce in user.ads %}
-                    <tr>
-                        <td scope="row">{{ annonce.title }}</td>
-                        <td>{{ annonce.description }}</td>
-                        <td>{{ annonce.city }}</td>
-                        <td>{{ annonce.zip }}</td>
-                        <td>{{ annonce.price }}</td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+
+                <div class="annonces_container">
+                    {% for annonce in user.ads %}
+                        <a href="/annonces/{{annonce.id}}">
+                        <div class="annonces_item">
+                            <p>{{ annonce.title }}</p>
+                            <p>{{ annonce.description }}</p>
+                            <p>{{ annonce.city }}</p>
+                            <p>{{ annonce.zip }}</p>
+                            <p>{{ annonce.price }}</p>
+                        </div>
+                        </a>
+                    {% endfor %}
+                </div>
         </main>
 {% endblock %}
 
