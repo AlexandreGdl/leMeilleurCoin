@@ -32,8 +32,8 @@
                         <td>{{ annonce.city }}</td>
                         <td>{{ annonce.zip }}</td>
                         <td>{{ annonce.price }}</td>
-                        <td><a href="/annonces/{{annonce.id}}"><i class="fas fa-info"></i></a></td>
-                        <td><a href="/remove/fav/{{annonce.id}}"><i class="fas fa-trash"></i></a></td>
+                        <td><a href="/annonces/{{annonce.id}}"><i class="fas fa-eye"></i></a></td>
+                        <td><a style="color: red" href="/remove/fav/{{annonce.id}}"><i class="fas fa-trash"></i></a></td>
 
                     </tr>
                 {% endfor %}
