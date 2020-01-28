@@ -4,7 +4,7 @@
 
 {% block body %}
         <main class="block_main">
-        <h2 class="mb-5">Mes annonces</h2>
+        <h2 class="mb-5">Mes fav</h2>
          {% for label, messages in app.flashes %}
             {% for message in messages %}
                 <div class="alert alert-{{ label }}" role="alert">
@@ -23,7 +23,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for annonce in user.ads %}
+                {% for annonce in user.fav %}
                     <tr>
                         <td scope="row">{{ annonce.title }}</td>
                         <td>{{ annonce.description }}</td>
