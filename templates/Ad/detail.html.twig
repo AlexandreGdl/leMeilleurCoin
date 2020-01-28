@@ -19,8 +19,11 @@
                         <p> Catégorie : {{category.title}}</p>
                     {% endfor %}
                     <a href="/fav/{{ annonce.id }}" class="btn btn-outline-primary" role="button" aria-pressed="true">Acheter</a>
-                    <a href="/fav/{{ annonce.id }}" class="btn btn-outline-primary" role="button" aria-pressed="true">Ajouter aux favoris</a>
-
+                    {% if exist %}
+                        <a href="/remove/fav/{{ annonce.id }}" class="btn btn-outline-primary" role="button" aria-pressed="true">Supprimez des favoris</a>
+                    {% else %}
+                        <a href="/fav/{{ annonce.id }}" class="btn btn-outline-primary" role="button" aria-pressed="true">Ajouter aux favoris</a>
+                    {% endif %}
                 </div>
             </div>
             <div class="map">

@@ -155,8 +155,11 @@ Class UserController extends AbstractController{
             $entityManager->persist($user);
             $entityManager->flush();
 
-            return $this->redirect('../profile/fav');
+            $path = explode('8000',$request->headers->get('referer'));
+
+            return $this->redirect($path[1]);
         }
+
 
 
         exit();
