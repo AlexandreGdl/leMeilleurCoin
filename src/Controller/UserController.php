@@ -182,7 +182,9 @@ Class UserController extends AbstractController{
             $user->removeFav($ad);
             $entityManager->flush();
 
-            return $this->redirectToRoute('user_getFav');
+            $path = explode('8000',$request->headers->get('referer'));
+
+            return $this->redirect($path[1]);
         }
         exit();
     }
