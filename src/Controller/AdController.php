@@ -104,9 +104,24 @@ Class AdController extends AbstractController{
      */
     public function detail(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $ad = $entityManager->getRepository('App:Ad')->find($request->get('id'));
+        $adId = $request->get('id');
+        $ad = $entityManager->getRepository('App:Ad')->find($adId);
+        $userId = $request->getSession()->get('id');
+        $exist = false;
 
-        return $this->render('Ad/detail.html.twig', ['annonce'=>$ad]);
+        if($userId){
+            $user = $entityManager->getRepository('App:User')->find($userId);
+            foreach($user->getFav() as $annonce){
+                if($annonce->getId() == $adId){
+                    $exist = true;
+                }
+            }
+            
+        }
+        return $this->render('Ad/detail.html.twig', [
+            'annonce'=>$ad,
+            'exist'=>$exist
+        ]);
     }
 
 }
