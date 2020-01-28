@@ -4,7 +4,7 @@
 
 {% block body %}
         <main class="block_main">
-        <h2 class="mb-5">Mes annonces</h2>
+        <h2 class="mb-5">MES ANNONCES</h2>
          {% for label, messages in app.flashes %}
             {% for message in messages %}
                 <div class="alert alert-{{ label }}" role="alert">
@@ -13,19 +13,31 @@
             {% endfor %}
         {% endfor %}
 
-                <div class="annonces_container">
-                    {% for annonce in user.ads %}
-                        <a href="/annonces/{{annonce.id}}">
-                        <div class="annonces_item">
-                            <p>{{ annonce.title }}</p>
-                            <p>{{ annonce.description }}</p>
-                            <p>{{ annonce.city }}</p>
-                            <p>{{ annonce.zip }}</p>
-                            <p>{{ annonce.price }}</p>
-                        </div>
-                        </a>
-                    {% endfor %}
-                </div>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Titre</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Ville</th>
+                    <th scope="col">Code postal</th>
+                    <th scope="col">Prix</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for annonce in user.ads %}
+                    <tr>
+                        <td scope="row">{{ annonce.title }}</td>
+                        <td>{{ annonce.description }}</td>
+                        <td>{{ annonce.city }}</td>
+                        <td>{{ annonce.zip }}</td>
+                        <td>{{ annonce.price }}</td>
+                        <td><a href="/annonces/{{annonce.id}}">Voir</a></td>
+
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
         </main>
 {% endblock %}
 

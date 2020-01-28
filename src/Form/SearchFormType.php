@@ -21,11 +21,12 @@ class SearchFormType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
-                'required' => true,
+                'required' => false,
                 'label' => 'Titre',
                 'attr' => ['placeholder' => 'Titre...', 'maxlength' => 100]
             ])
             ->add('categories', EntityType::class, [
+                'required' => false,
                 'class' => Category::class,
                 'multiple' => true,
                 'query_builder' => function (EntityRepository $er) {
@@ -35,12 +36,12 @@ class SearchFormType extends AbstractType
                 'choice_label' => 'title',
             ])
             ->add('zip',IntegerType::class, [
-                'required' => true,
+                'required' => false,
                 'label' => 'Code postal',
                 'attr' => ['placeholder' => 'Code postal...', 'maxlength' => 5]
             ])
             ->add('price', MoneyType::class, [
-                'required' => true,
+                'required' => false,
                 'label' => 'Prix',
                 'attr' => ['placeholder' => 'Prix...']
             ])

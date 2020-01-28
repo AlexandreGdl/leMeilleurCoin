@@ -138,7 +138,7 @@
 
 .block_main .annonces_container{
     width: 80%;
-    margin: 0 auto
+    margin: 0 auto;
 }
 
 .block_main .annonces_container a {
@@ -150,6 +150,8 @@
     background-color: rgb(224, 224, 224);
     border-radius: 7px;
     margin:15px 0;
+    padding: 15px;
+
     transition: all .3s;
     -webkit-box-shadow: 10px 10px 32px -16px rgba(0,0,0,0.75);
 -moz-box-shadow: 10px 10px 32px -16px rgba(0,0,0,0.75);
