@@ -26,6 +26,7 @@ class Ad
      *     min="2", max="50",
      *     minMessage = "1 caractère minimum !",
      *     maxMessage = "100 caractères maximum !",
+     *     groups={"search", "create"}
      *)
      *
      * @ORM\Column(type="string", length=100)
@@ -38,6 +39,7 @@ class Ad
      *     min="2", max="1000",
      *     minMessage = "1 caractère minimum !",
      *     maxMessage = "1000 caractères maximum !",
+     *     groups={"search", "create"}
      *)
      *
      * @ORM\Column(type="text")
@@ -50,6 +52,7 @@ class Ad
      *     min="1", max="150",
      *     minMessage = "1 caractère minimum !",
      *     maxMessage = "150 caractères maximum !",
+     *     groups={"search", "create"}
      *)
      *
      * @ORM\Column(type="string", length=150)
@@ -60,7 +63,8 @@ class Ad
      * @Assert\NotBlank(message="Veuillez renseigner un code postal (ex: 49000) à votre annonce !")
      * @Assert\Length(
      *     min="5", max="5",
-     *     exactMessage="Un code postal contient 5 chiffres !"
+     *     exactMessage="Un code postal contient 5 chiffres !",
+     *     groups={"search", "create"}
      * )
      *
      * @ORM\Column(type="integer")
@@ -71,7 +75,8 @@ class Ad
      * @Assert\NotBlank(message="Veuillez renseigner un prix à votre annonce !")
      * @Assert\Type(
      *    type="integer",
-     *    message="test"
+     *    message="test",
+     *    groups={"search", "create"}
      * )
      *
      * @ORM\Column(type="integer")

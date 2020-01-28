@@ -53,10 +53,23 @@ class AdRepository extends ServiceEntityRepository
      * @param string $name
      * @return User[]
      */
-    public function findUserByName($name) {
+    public function findUserByName($name)
+    {
         $queryBuilder = $this->find('u')
             ->setMaxResults(10);
 
         return $queryBuilder->getQuery()->getResult();
+    }
+
+    /**
+     * @param string $title
+     * @return Ad[]
+     */
+    public function searchAd($title){
+
+        $queryBuilder = $this->createQueryBuilder('a')
+            ->where('a.title LIKE :title')->setParameter('title', '%'.$title.'%');
+
+        return $queryBuilder->getQuery()->getArrayResult();
     }
 }
