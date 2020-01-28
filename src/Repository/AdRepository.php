@@ -74,8 +74,8 @@ class AdRepository extends ServiceEntityRepository
 
         $queryBuilder = $this->createQueryBuilder('a')
             ->where('a.title LIKE :title')->setParameter('title', '%'.$title.'%')
-            ->orWhere('a.zip LIKE :zip')->setParameter('zip', '%'.$zip.'%')
-            ->orWhere('a.price LIKE :price')->setParameter('price', '%'.$price.'%');
+            ->andWhere('a.zip LIKE :zip')->setParameter('zip', '%'.$zip.'%')
+            ->andWhere('a.price LIKE :price')->setParameter('price', '%'.$price.'%');
 
         return $queryBuilder->getQuery()->getArrayResult();
     }

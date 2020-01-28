@@ -16,10 +16,11 @@
                     <p>Code postale de l'annonceur : {{ annonce.zip }}</p>
                     <p>Prix : {{ annonce.price }}€</p>
                     {% for category in annonce.categories %}
-                        <p> {{category.title}}
+                        <p> Catégorie : {{category.title}}</p>
                     {% endfor %}
-                    <p>Prix : {{ annonce.price }}€</p>
-                    <button type="button" class="btn btn-outline-primary">Acheter</button>
+                    <a href="/fav/{{ annonce.id }}" class="btn btn-outline-primary" role="button" aria-pressed="true">Acheter</a>
+                    <a href="/fav/{{ annonce.id }}" class="btn btn-outline-primary" role="button" aria-pressed="true">Ajouter aux favoris</a>
+
                 </div>
             </div>
             <div class="map">

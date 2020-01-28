@@ -154,8 +154,10 @@ Class UserController extends AbstractController{
             $user->addFav($ad);
             $entityManager->persist($user);
             $entityManager->flush();
+
+            return $this->redirect('../profile/fav');
         }
-       
+
 
         exit();
     }
