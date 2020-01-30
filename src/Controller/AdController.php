@@ -108,6 +108,7 @@ Class AdController extends AbstractController{
         $ad = $entityManager->getRepository('App:Ad')->find($adId);
         $userId = $request->getSession()->get('id');
         $exist = false;
+        $userAd = $ad->getUser();
         // si l'utilisateur est connecter
         if($userId){
             $user = $entityManager->getRepository('App:User')->find($userId);
@@ -120,7 +121,8 @@ Class AdController extends AbstractController{
         }
         return $this->render('Ad/detail.html.twig', [
             'annonce'=>$ad,
-            'exist'=>$exist
+            'exist'=>$exist,
+            'userAd'=>$userAd
         ]);
     }
 
