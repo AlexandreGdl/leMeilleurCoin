@@ -83,17 +83,6 @@ Class UserController extends AbstractController{
         ]);
     }
 
-    /**
-     * @Route("/all",name="user_all",methods={"GET","POST"})
-     * 
-     * @param Request $request
-     * @return Response
-     */
-    public function all(Request $request, EntityManagerInterface $entityManager): Response
-    {       
-            $userGet = $entityManager->getRepository('App:User')->getAllUser();
-           return $this->render('User/all.html.twig',['user'=>$userGet]);
-    }
 
     /**
      * @Route("/disconnect",name="user_disconnect",methods={"GET","POST"})
@@ -187,5 +176,30 @@ Class UserController extends AbstractController{
             return $this->redirect($path[1]);
         }
         exit();
+    }
+
+    /**
+     * @Route("/profile/{id}",requirements={"id"="\d+"},name="user_profile",methods={"GET"})
+     *
+     * @param Request $request
+     * @return Response
+     */
+
+    public function profile(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $user = $entityManager->getRepository('App:User')->find($request->get('id'));
+        $id = $request->get('id');
+        $idSession = $request->getSession()->get('id');
+        $sessionProfile = false;
+        if ($idSession){
+            if($id == $idSession ){
+                $sessionProfile = true;
+            }
+        }
+       
+        return $this->render('User/profile.html.twig',[
+            'user'=>$user,
+            'sessionProfile' => $sessionProfile
+        ]);
     }
 }
