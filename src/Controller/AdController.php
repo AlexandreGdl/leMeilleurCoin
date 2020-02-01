@@ -144,7 +144,8 @@ Class AdController extends AbstractController{
             $user = $entityManager->getRepository('App:User')->find($userId);
             $ad = $entityManager->getRepository('App:Ad')->find($id);
             if ($ad){
-                if ($ad->getUser() == $user){
+                $adOwner = $ad->getUser();
+                if ($adOwner == $user){
                     $entityManager->remove($ad);
                     $entityManager->flush();
                     return $this->redirect($path[1]);
