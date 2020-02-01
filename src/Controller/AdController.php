@@ -126,5 +126,36 @@ Class AdController extends AbstractController{
         ]);
     }
 
+
+    /**
+     * @Route("/remove/ad/{id}", requirements={"id"="\d+"},name="ad_remove",methods={"GET"})
+     * 
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
+    public function remove(Request $request, EntityManagerInterface $entityManager): Response
+    {   
+        $userId = $request->getSession()->get('id');
+        $id = $request->get('id');
+        $path = explode('8000',$request->headers->get('referer'));
+        $message = "";
+        if ($userId){
+            $user = $entityManager->getRepository('App:User')->find($userId);
+            $ad = $entityManager->getRepository('App:Ad')->find($id);
+            if ($ad){
+                $adOwner = $ad->getUser();
+                if ($adOwner == $user){
+                    $entityManager->remove($ad);
+                    $entityManager->flush();
+                    return $this->redirect($path[1]);
+                } else { $message = "Cette annonce ne vous appartiens pas !"; }
+            } else { $message = "Cette annonce n'existe pas/plus."; }
+        } else { $message = "Vous devez etre connecté."; }
+
+        return $this->render('error.html.twig',[
+            'message'=>$message
+        ]);
+    }
 }
 

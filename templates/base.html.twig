@@ -47,7 +47,7 @@
 
                     {% if app.session.get('identifiant') %}
                         <li class="{{"item_menu "}}">
-                            <a href="/profile/annonces">Mes Annonces</a>
+                            <a href="/profile/{{app.session.get('id')}}">Profile</a>
                             <div class="line_menu"></div>
                         </li>
                         <li class="{{"item_menu "}}">
