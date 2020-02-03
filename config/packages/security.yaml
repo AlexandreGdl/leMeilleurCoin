@@ -1,13 +1,26 @@
 security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    encorders:
+        App\Entity\User:
+            algorithm: 'argon2i'
     providers:
-        in_memory: { memory: null }
+        users:
+            entity:
+                class: 'App\Entity\User'
+    
+    role_hierarchie:
+        ROLE_USER: [IS_AUTHENTICATED_FULLY]
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            anonymous: lazy
+            pattern: ^/
+            provider: users
+            anonymous: ~
+            guard:
+                authenticators:
+                    - App\Security\LoginAuthenticator
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
@@ -18,5 +31,5 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         # - { path: ^/profile, roles: ROLE_USER }
