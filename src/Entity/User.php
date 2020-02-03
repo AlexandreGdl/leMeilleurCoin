@@ -68,6 +68,11 @@ class User
      */
     private $fav;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $money;
+
     public function __construct()
     {
         $this->ads = new ArrayCollection();
@@ -195,4 +200,17 @@ class User
 
         return $this;
     }
+
+    public function getMoney(): ?int
+    {
+        return $this->money;
+    }
+
+    public function setMoney(?int $money): self
+    {
+        $this->money = $money;
+
+        return $this;
+    }
+
 }
