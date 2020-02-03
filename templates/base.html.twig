@@ -21,7 +21,8 @@
             <div>
                 <h1 class="text-center mt-4 site_name"><a href="/">LeMeilleurCoin</a></h1>
                 {% if app.session.get('identifiant') %}
-                <p class="text-center">Bienvenue {{app.session.get('identifiant')}}</p>
+                    <p class="text-center">Bienvenue {{app.session.get('identifiant')}}</p>
+                    <p  class="text-center">AlyCoin : </p>
                 {% endif %}
             </div>
             <nav class="block_nav">
