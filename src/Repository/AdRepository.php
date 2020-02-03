@@ -70,10 +70,15 @@ class AdRepository extends ServiceEntityRepository
      * @param string $price
      * @return Ad[]
      */
-    public function searchAd($title, $zip, $price){
+    public function searchAd($title, $zip, $price,$category){
 
+        $categories = [];
+        foreach($category as $cTitle){
+            array_push($categories,$cTitle->getTitle());
+        }
         $queryBuilder = $this->createQueryBuilder('a')
             ->where('a.title LIKE :title')->setParameter('title', '%'.$title.'%')
+            ->innerJoin('a.categories', 'c','WITH','c.title IN (:name)')->setParameter('name', $categories)
             ->andWhere('a.zip LIKE :zip')->setParameter('zip', '%'.$zip.'%')
             ->andWhere('a.price LIKE :price')->setParameter('price', '%'.$price.'%');
 

@@ -69,7 +69,8 @@ Class AdController extends AbstractController{
             $title = $search->getTitle();
             $zip = $search->getZip();
             $price = $search->getPrice();
-            $searchAd = $entityManager->getRepository("App:Ad")->SearchAd($title, $zip, $price);
+            $category = $search->getCategories();
+            $searchAd = $entityManager->getRepository("App:Ad")->SearchAd($title, $zip, $price,$category);
             // appel de la vue
             return $this->render('Ad/results.html.twig', [
                 'formSearch'=>$formSearch->createView(),
