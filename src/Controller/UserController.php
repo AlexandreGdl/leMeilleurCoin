@@ -99,21 +99,6 @@ Class UserController extends AbstractController{
     }
 
     /**
-     * @Route("/profile/annonces",name="user_annonces",methods={"GET","POST"})
-     * 
-     * @param Request $request
-     * @return Response
-     */
-    public function annonces(Request $request, EntityManagerInterface $entityManager): Response
-    {       
-        $user = $entityManager->getRepository('App:User')->find($request->getSession()->get('id'));
-
-        return $this->render('User/annonces.html.twig',[
-            "user"=> $user
-        ]);
-    }
-
-    /**
      * @Route("/profile/fav",name="user_getFav",methods={"GET","POST"})
      * 
      * @param Request $request

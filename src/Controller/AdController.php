@@ -35,12 +35,13 @@ Class AdController extends AbstractController{
             $ad->setDatecreated(new\Datetime('now'));
             $user = $entityManager->getRepository('App:User')->find($request->getSession()->get('id'));
             $ad->setUser($user);
+            $id = $request->getSession()->get('id');
             $entityManager->persist($ad);
             $entityManager->flush();
 
             // Création d'un message flash
             $this->addFlash("success", "Votre annonce a bien été créée !");
-            return $this->redirect('profile/annonces');
+            return $this->redirect('profile/'.$id);
         }
         // appel de la vue
         return $this->render('Ad/new.html.twig',[
@@ -148,6 +149,7 @@ Class AdController extends AbstractController{
                 if ($adOwner == $user){
                     $entityManager->remove($ad);
                     $entityManager->flush();
+                    $this->addFlash("success","Annonces supprimé !");
                     return $this->redirect($path[1]);
                 } else { $message = "Cette annonce ne vous appartiens pas !"; }
             } else { $message = "Cette annonce n'existe pas/plus."; }
