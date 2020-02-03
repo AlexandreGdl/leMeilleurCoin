@@ -26,7 +26,7 @@ class UserType extends AbstractType
                 'label'=>'Email',
                 'attr'=>['placeholder'=>'Email...','maxlength'=>150]
             ])
-            ->add('password',PasswordType::class,[
+            ->add('plainPassword',PasswordType::class,[
                 'required'=>true,
                 'label'=>'Mot de passe',
                 'attr'=>['placeholder'=>'Mot de passe...','maxlength'=>50]

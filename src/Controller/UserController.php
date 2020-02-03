@@ -70,7 +70,7 @@ Class UserController extends AbstractController{
             $exist = $entityManager->getRepository('App:User')->connexion($user->getEmail(),$user->getPassword());
             
             if ($exist){
-                $request->getSession()->set('identifiant',$exist[0]['username']);
+                $request->getSession()->set('identifiant',$exist[0]['identifiant']);
                 $request->getSession()->set('email',$exist[0]['email']);
                 $request->getSession()->set('id',$exist[0]['id']);
                 return $this->redirect('/');

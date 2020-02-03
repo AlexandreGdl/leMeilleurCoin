@@ -30,7 +30,7 @@ class User implements UserInterface
      *      maxMessage="50 caractères maximum",groups={"registration"}
      * )
      */
-    private $username;
+    private $identifiant;
 
     /**
      * @ORM\Column(type="string", length=150)
@@ -49,10 +49,11 @@ class User implements UserInterface
     private $password;
 
     /**
+     * @var array
      * 
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="json")
      */
-    private $roles;
+    private $roles = ['ROLE_USER'];
 
     /**
      * @ORM\Column(type="datetime")
@@ -74,6 +75,12 @@ class User implements UserInterface
      */
     private $money;
 
+    /*
+    * @var string|null
+    *
+    */
+    private $plainPassword = null;
+
     public function __construct()
     {
         $this->ads = new ArrayCollection();
@@ -85,14 +92,14 @@ class User implements UserInterface
         return $this->id;
     }
 
-    public function getUsername(): ?string
+    public function getIdentifiant(): ?string
     {
-        return $this->username;
+        return $this->identifiant;
     }
 
-    public function setUsername(?string $username): self
+    public function setIdentifiant(?string $identifiant): self
     {
-        $this->username = $username;
+        $this->identifiant = $identifiant;
 
         return $this;
     }
@@ -117,18 +124,6 @@ class User implements UserInterface
     public function setPassword(string $password): self
     {
         $this->password = $password;
-
-        return $this;
-    }
-
-    public function getRoles(): ?string
-    {
-        return $this->roles;
-    }
-
-    public function setRoles(string $roles): self
-    {
-        $this->roles = $roles;
 
         return $this;
     }
@@ -219,7 +214,7 @@ class User implements UserInterface
      */
     public function getSalt()
     {
-        // TODO: Implement getSalt() method.
+        return null;
     }
 
     /**
@@ -227,6 +222,23 @@ class User implements UserInterface
      */
     public function eraseCredentials()
     {
-        // TODO: Implement eraseCredentials() method.
+        $this->plainPassword = null;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getusername()
+    {
+        return $this->email;
+    }
+
 }
