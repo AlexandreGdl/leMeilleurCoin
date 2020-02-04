@@ -40,7 +40,7 @@ Class UserController extends AbstractController{
      */
     public function addFav(Request $request, EntityManagerInterface $entityManager): Response
     {       
-        if($this->getUser()->getId()){
+        if($this->getUser()){
             $user = $entityManager->getRepository('App:User')->find($this->getUser()->getId());
             $id = $request->get('id');
             $ad = $entityManager->getRepository('App:Ad')->find($id);
@@ -67,7 +67,7 @@ Class UserController extends AbstractController{
 
     public function removeFav(Request $request, EntityManagerInterface $entityManager): Response
     {
-        if($this->getUser()->getId()){
+        if($this->getUser()){
             $user = $entityManager->getRepository('App:User')->find($this->getUser()->getId());
             $id = $request->get('id');
             $ad = $entityManager->getRepository('App:Ad')->find($id);
@@ -104,5 +104,27 @@ Class UserController extends AbstractController{
             'user'=>$user,
             'sessionProfile' => $sessionProfile
         ]);
+    }
+
+    /**
+     * @Route("/money",name="user_money",methods={"GET", "POST"})
+     *
+     * @param Request $request
+     * @return Response
+     */
+
+    public function money(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $user = $this->getUser();
+        if($this->getUser()) {
+            if ($request->get('money')) {
+                $money = $request->get('money') + $user->getMoney();
+                $user->setMoney($money);
+                $entityManager->persist($user);
+                $entityManager->flush();
+            }
+        }
+
+        return $this->render('User/money.html.twig');
     }
 }

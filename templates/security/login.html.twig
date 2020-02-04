@@ -4,7 +4,9 @@
 
 {% block body %}
 <main class="block_main">
-<form method="post">
+
+
+    <form method="post" class="w-50">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
@@ -16,7 +18,7 @@
     {% endif %}
 
     <h1 class="h3 mb-3 font-weight-normal">Connexion</h1>
-    <label for="inputEmail">Email</label>
+    <label  inputEmail">Email</label>
     <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
     <label for="inputPassword">Password</label>
     <input type="password" name="password" id="inputPassword" class="form-control" required>
@@ -36,7 +38,7 @@
         </div>
     #}
 
-    <button class="btn btn-lg btn-primary" type="submit">
+    <button class="btn mt-3  btn-md btn-primary" type="submit">
         Sign in
     </button>
 </form>

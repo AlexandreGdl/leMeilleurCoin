@@ -22,7 +22,8 @@
                 <h1 class="text-center mt-4 site_name"><a href="/">LeMeilleurCoin</a></h1>
                 {% if app.user %}
                     <p class="text-center">Bienvenue {{app.user.identifiant}}</p>
-                    <p  class="text-center">AlyCoin : {{app.user.money}} </p>
+                    <p class="text-center">AlyCoin : {{app.user.money}} </p>
+                    <p class="text-center"><a href="/money">Ajouter des alycoins</a></p>
                 {% endif %}
             </div>
             <nav class="block_nav">
