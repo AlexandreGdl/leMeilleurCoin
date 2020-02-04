@@ -43,8 +43,7 @@ class User implements UserInterface
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=50)
-     * @Assert\NotBlank(message="Veuillez renseignez un mot de passe.",groups={"registration","connexion"})
+     * @ORM\Column(type="string", length=150)
      */
     private $password;
 
@@ -77,7 +76,7 @@ class User implements UserInterface
 
     /*
     * @var string|null
-    *
+    * @Assert\NotBlank(message="Veuillez renseignez un mot de passe.",groups={"registration","connexion"})
     */
     private $plainPassword = null;
 
@@ -239,6 +238,17 @@ class User implements UserInterface
     public function getusername()
     {
         return $this->email;
+    }
+
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword($plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
+        return $this;
     }
 
 }

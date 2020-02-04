@@ -20,7 +20,7 @@ class UserConnexionType extends AbstractType
                 'label'=>'Adresse Email',
                 'attr'=> ['placeholder' => 'Adresse Email...','maxlength'=>50]
             ])
-            ->add('password',PasswordType::class,[
+            ->add('plainPassword',PasswordType::class,[
                 'required'=>true,
                 'label'=>'Mot de passe',
                 'attr'=>['placeholder'=>'Mot de passe...','maxlength'=>50]
