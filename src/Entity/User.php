@@ -70,9 +70,9 @@ class User implements UserInterface
     private $fav;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer")
      */
-    private $money;
+    private $money = 0;
 
     /*
     * @var string|null

@@ -24,7 +24,7 @@ Class UserController extends AbstractController{
      */
     public function getFav(Request $request, EntityManagerInterface $entityManager): Response
     {       
-        $user = $entityManager->getRepository('App:User')->find($request->getSession()->get('id'));
+        $user = $entityManager->getRepository('App:User')->find($this->getUser()->getId());
 
         return $this->render('User/fav.html.twig',[
             "user"=> $user
@@ -40,8 +40,8 @@ Class UserController extends AbstractController{
      */
     public function addFav(Request $request, EntityManagerInterface $entityManager): Response
     {       
-        if($request->getSession()->get('id')){
-            $user = $entityManager->getRepository('App:User')->find($request->getSession()->get('id'));
+        if($this->getUser()->getId()){
+            $user = $entityManager->getRepository('App:User')->find($this->getUser()->getId());
             $id = $request->get('id');
             $ad = $entityManager->getRepository('App:Ad')->find($id);
             $user->addFav($ad);
@@ -67,8 +67,8 @@ Class UserController extends AbstractController{
 
     public function removeFav(Request $request, EntityManagerInterface $entityManager): Response
     {
-        if($request->getSession()->get('id')){
-            $user = $entityManager->getRepository('App:User')->find($request->getSession()->get('id'));
+        if($this->getUser()->getId()){
+            $user = $entityManager->getRepository('App:User')->find($this->getUser()->getId());
             $id = $request->get('id');
             $ad = $entityManager->getRepository('App:Ad')->find($id);
             $user->removeFav($ad);
@@ -92,7 +92,7 @@ Class UserController extends AbstractController{
     {
         $user = $entityManager->getRepository('App:User')->find($request->get('id'));
         $id = $request->get('id');
-        $idSession = $request->getSession()->get('id');
+        $idSession = $this->getUser()->getId();
         $sessionProfile = false;
         if ($idSession){
             if($id == $idSession ){

@@ -20,9 +20,9 @@
             {% set url = 'toto' %}
             <div>
                 <h1 class="text-center mt-4 site_name"><a href="/">LeMeilleurCoin</a></h1>
-                {% if app.session.get('identifiant') %}
-                    <p class="text-center">Bienvenue {{app.session.get('identifiant')}}</p>
-                    <p  class="text-center">AlyCoin : </p>
+                {% if app.user %}
+                    <p class="text-center">Bienvenue {{app.user.identifiant}}</p>
+                    <p  class="text-center">AlyCoin : {{app.user.money}} </p>
                 {% endif %}
             </div>
             <nav class="block_nav">
@@ -46,9 +46,9 @@
                         <div class="line_menu"></div>
                     </li>
 
-                    {% if app.session.get('identifiant') %}
+                    {% if app.user %}
                         <li class="{{"item_menu "}}">
-                            <a href="/profile/{{app.session.get('id')}}">Profile</a>
+                            <a href="/profile/{{app.user.id}}">Profile</a>
                             <div class="line_menu"></div>
                         </li>
                         <li class="{{"item_menu "}}">
@@ -56,7 +56,7 @@
                             <div class="line_menu"></div>
                         </li>
                         <li class="{{"item_menu"}}">
-                            <a href="/disconnect">Deconnexion</a>
+                            <a href="/logout">Deconnexion</a>
                             <div class="line_menu"></div>
                         </li>
                     {% else %}

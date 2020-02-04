@@ -17,9 +17,9 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/login", name="security_login")
+     * @Route("/login", name="app_login")
      */
-    public function login(Request $request,AuthenticationUtils $authenticationUtils): Response
+    public function login(Request $request,AuthenticationUtils $authenticationUtils,EntityManagerInterface $entityManager): Response
     {
         if ($this->getUser()) {
             return $this->redirect('/');
@@ -30,25 +30,17 @@ class SecurityController extends AbstractController
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        $user = new User();
-        $formUser = $this->createForm(UserConnexionType::class, $user , ["validation_groups" => ["connexion"]]);
 
-        $formUser->handleRequest($request);
-        if ($formUser->isSubmitted() && $formUser->isValid()){
-            
-            
-
-        }
-
-        return $this->render('User/connexion.html.twig', ['last_username' => $lastUsername, 'error' => $error,'formUser'=>$formUser->createView()]);
+        return $this->render('Security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error,]);
     }
 
     /**
-     * @Route("/logout", name="security_logout")
+     * @Route("/logout", name="app_logout")
      */
     public function logout()
     {
-        throw new \Exception('This method can be blank - it will be intercepted by the logout key on your firewall');
+        return $this->redirectToRoute('home_index');
+        //throw new \Exception('This method can be blank - it will be intercepted by the logout key on your firewall');
     }
 
     /**
@@ -81,7 +73,7 @@ class SecurityController extends AbstractController
                 $entityManager->persist($user);
                 $entityManager->flush();
                 $this->addFlash("success","Utilisateur Inscrit !");
-                return $this->redirectToRoute('security_login');
+                return $this->redirectToRoute('app_login');
             }
 
 
