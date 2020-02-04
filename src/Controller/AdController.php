@@ -30,12 +30,12 @@ Class AdController extends AbstractController{
 
         // vérification du formulaire
         $formAd->handleRequest($request);
-        if ($formAd->isSubmitted() && $formAd->isValid() && $request->getSession()->get('identifiant')) {
+        if ($formAd->isSubmitted() && $formAd->isValid() && $this->getUser()->getIdentifiant()) {
 
             $ad->setDatecreated(new\Datetime('now'));
-            $user = $entityManager->getRepository('App:User')->find($request->getSession()->get('id'));
+            $user = $entityManager->getRepository('App:User')->find($this->getUser()->getId());
             $ad->setUser($user);
-            $id = $request->getSession()->get('id');
+            $id = $this->getUser()->getId();
             $entityManager->persist($ad);
             $entityManager->flush();
 
@@ -108,7 +108,7 @@ Class AdController extends AbstractController{
     {
         $adId = $request->get('id');
         $ad = $entityManager->getRepository('App:Ad')->find($adId);
-        $userId = $request->getSession()->get('id');
+        $userId = $this->getUser()->getId();
         $exist = false;
         $userAd = $ad->getUser();
         // si l'utilisateur est connecter
@@ -138,7 +138,7 @@ Class AdController extends AbstractController{
      */
     public function remove(Request $request, EntityManagerInterface $entityManager): Response
     {   
-        $userId = $request->getSession()->get('id');
+        $userId = $this->getUser()->getId();
         $id = $request->get('id');
         $path = explode('8000',$request->headers->get('referer'));
         $message = "";
