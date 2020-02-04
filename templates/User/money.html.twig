@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LeMeilleurCoin - Symfony Projet{% endblock %}
+
+{% block body %}
+    {% if app.user %}
+
+    {% endif %}
+    <main class="block_main">
+        <h2 class="mb-5">RECHARGER VOTRE COMPTE EN ALYCOIN</h2>
+
+        <form method="post" class="w-50">
+            <input type="number" name="money" class="form-control" required autofocus>
+            <button class="btn mt-3  btn-md btn-primary" type="submit">Recharger</button>
+        </form>
+    </main>
+{% endblock %}
+
+{% block javascripts %}{% endblock %}
