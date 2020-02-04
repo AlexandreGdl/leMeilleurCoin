@@ -8,7 +8,7 @@
         <div class="block_detail mt-5">
             <div class="inner">
                 <div class="block_titre">
-                    <p class="auteur">Auteur : <a href="/profile/{{userAd.id}}" style="text-decoration:none">{{userAd.username}}</a></p>
+                    <p class="auteur">Auteur : <a href="/profile/{{annonce.user.id}}" style="text-decoration:none">{{annonce.user.username}}</a></p>
                     <h3>{{ annonce.title }}</h3>
                     <p>{{ annonce.description }}</p>
                 </div>
@@ -24,6 +24,26 @@
                         <a href="/remove/fav/{{ annonce.id }}" class="btn btn-outline-danger" role="button" aria-pressed="true">Supprimez des favoris</a>
                     {% else %}
                         <a href="/fav/{{ annonce.id }}" class="btn btn-outline-success" role="button" aria-pressed="true">Ajouter aux favoris</a>
+                    {% endif %}
+                    {% if bid.closed %}
+                        <p>Cette annonces est cloturé</p>
+                    {% else %}
+                        {% if myAd %}
+                            <a href="/ad/close/{{ annonce.id }}" class="btn btn-outline-danger" role="button" aria-pressed="true">Cloturez l'annonce</a>
+                        {% elseif app.user %}
+
+                            <form method="post" action="/ad/bid" class="input-group mt-3" >
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">Montant</span>
+                                </div>
+                                <input class="form-control" type="number" name="price"/>
+                                <button type="submit" class="btn btn-primary">Enchérir</button>
+                            </form>
+                        {% else %}
+                            <div class="alert alert-danger" role="alert">
+                                Seul les utilisateurs <a href="/login">connectés</a> peuvent enchérir sur notre site.
+                            </div>
+                        {% endif %}
                     {% endif %}
                 </div>
             </div>

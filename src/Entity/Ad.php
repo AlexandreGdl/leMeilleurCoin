@@ -100,6 +100,17 @@ class Ad
      */
     private $user;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Bid", mappedBy="ad", cascade={"persist", "remove"})
+     */
+    private $bid;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $date_fin;
+
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -216,6 +227,35 @@ class Ad
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getBid(): ?Bid
+    {
+        return $this->bid;
+    }
+
+    public function setBid(Bid $bid): self
+    {
+        $this->bid = $bid;
+
+        // set the owning side of the relation if necessary
+        if ($bid->getAd() !== $this) {
+            $bid->setAd($this);
+        }
+
+        return $this;
+    }
+
+    public function getDateFin(): ?\DateTimeInterface
+    {
+        return $this->date_fin;
+    }
+
+    public function setDateFin(\DateTimeInterface $date_fin): self
+    {
+        $this->date_fin = $date_fin;
 
         return $this;
     }

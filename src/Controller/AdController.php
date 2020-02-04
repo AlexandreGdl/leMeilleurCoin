@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Ad;
+use App\Entity\Bid;
 use App\Form\AdType;
 
 Class AdController extends AbstractController{
@@ -30,13 +31,17 @@ Class AdController extends AbstractController{
 
         // vérification du formulaire
         $formAd->handleRequest($request);
-        if ($formAd->isSubmitted() && $formAd->isValid() && $this->getUser()->getIdentifiant()) {
+        if ($formAd->isSubmitted() && $formAd->isValid() && $this->getUser()) {
 
             $ad->setDatecreated(new\Datetime('now'));
             $user = $entityManager->getRepository('App:User')->find($this->getUser()->getId());
             $ad->setUser($user);
+            $bid = new Bid();
+            $bid->setAd($ad);
+            $bid->setPrice($ad->getPrice());
             $id = $this->getUser()->getId();
             $entityManager->persist($ad);
+            $entityManager->persist($bid);
             $entityManager->flush();
 
             // Création d'un message flash
@@ -108,23 +113,26 @@ Class AdController extends AbstractController{
     {
         $adId = $request->get('id');
         $ad = $entityManager->getRepository('App:Ad')->find($adId);
-        $userId = $this->getUser()->getId();
+        $userId = false;
         $exist = false;
+        $myAd = false;
         $userAd = $ad->getUser();
-        // si l'utilisateur est connecter
-        if($userId){
-            $user = $entityManager->getRepository('App:User')->find($userId);
-            foreach($user->getFav() as $annonce){
+        if($this->getUser()){
+            if($userAd == $this->getUser()){
+                $myAd = true;
+            }
+            foreach($this->getUser()->getFav() as $annonce){
                 if($annonce->getId() == $adId){
                     $exist = true;
                 }
             }
-            
         }
+        $bid = $ad->getBid();
         return $this->render('Ad/detail.html.twig', [
             'annonce'=>$ad,
             'exist'=>$exist,
-            'userAd'=>$userAd
+            'bid'=>$bid,
+            'myAd'=>$myAd
         ]);
     }
 
@@ -160,5 +168,36 @@ Class AdController extends AbstractController{
             'message'=>$message
         ]);
     }
+
+    /**
+     * @Route("/ad/close/{id}", requirements={"id"="\d+"},name="ad_close",methods={"GET"})
+     * 
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
+    public function close(Request $request, EntityManagerInterface $entityManager): Response
+    {   
+        if ($this->getUser()){
+            $ad = $entityManager->getRepository('App:Ad')->find($request->get('id'));
+            if ($ad){
+                if ($ad->getUser()->getId() == $this->getUser()->getId()){
+                    $bid = $ad->getBid();
+                    $bid->setClosed(true);
+                    $entityManager->persist($bid);
+                    $entityManager->flush();
+                    $path = explode('8000',$request->headers->get('referer'));
+
+                    return $this->redirect($path[1]);
+                } else {$message = "Cette annonce n'est pas a vous.";}
+            } else {$message = "Cette annonce n'existe pas/plus.";}
+        } else {
+            return $this->redirectToRoute('security_login');
+        }
+        return $this->render('error.html.twig',[
+            'message'=>$message
+        ]);
+    }
+
 }
 
