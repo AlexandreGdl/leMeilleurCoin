@@ -12,6 +12,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
@@ -55,6 +56,10 @@ class AdType extends AbstractType
                 'required' => true,
                 'label' => 'Prix',
                 'attr' => ['placeholder' => 'Prix...']
+            ])
+            ->add('date_fin',DateTimeType::class, [
+                'required' => true,
+                'label' => 'Date de fin ( vous pourrez stoper la vente a tout moment )',
             ])
             ->add('submit', SubmitType::class,[
                 "label"=>"Envoyer"
