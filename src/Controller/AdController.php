@@ -33,6 +33,24 @@ Class AdController extends AbstractController{
         $formAd->handleRequest($request);
         if ($formAd->isSubmitted() && $formAd->isValid() && $this->getUser()) {
 
+            $directory = './assets/';
+            $file = $formAd['imagePath']->getData();
+            if ($file){
+                $someNewFilename = substr(str_shuffle(MD5(microtime())), 0, 150);
+                $type = $file->guessExtension();
+                dump($type);
+                if(!$type){
+                    $type = 'bin';
+                }
+                $freshNewName = $someNewFilename.'.'.$type;
+                try{
+                    $file->move($directory, $freshNewName);
+                } catch (FileException $e){
+                    exit();
+                }
+                $ad->setImagePath($freshNewName);
+                dump($file);
+            }
             $ad->setDatecreated(new\Datetime('now'));
             $user = $entityManager->getRepository('App:User')->find($this->getUser()->getId());
             $ad->setUser($user);

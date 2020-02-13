@@ -10,6 +10,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -60,6 +61,11 @@ class AdType extends AbstractType
             ->add('date_fin',DateTimeType::class, [
                 'required' => true,
                 'label' => 'Date de fin ( vous pourrez stoper la vente a tout moment )',
+            ])
+            ->add('imagePath',FileType::class, [
+                'required' => false,
+                'label' => 'Image de annonce',
+                'attr'=>['accept'=> 'image/png, image/jpeg']
             ])
             ->add('submit', SubmitType::class,[
                 "label"=>"Envoyer"

@@ -110,6 +110,11 @@ class Ad
      */
     private $date_fin;
 
+    /**
+     * @ORM\Column(type="string", length=255,nullable=true)
+     */
+    private $imagePath;
+
 
     public function __construct()
     {
@@ -256,6 +261,18 @@ class Ad
     public function setDateFin(\DateTimeInterface $date_fin): self
     {
         $this->date_fin = $date_fin;
+
+        return $this;
+    }
+
+    public function getImagePath(): ?string
+    {
+        return $this->imagePath;
+    }
+
+    public function setImagePath(string $imagePath): self
+    {
+        $this->imagePath = $imagePath;
 
         return $this;
     }
